@@ -1,0 +1,25 @@
+{
+  "name": "mycampus-server",
+  "version": "1.0.0",
+  "description": "MyCampus backend: Express API with PostgreSQL, Prisma and OpenRouter",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "npx nodemon server",
+    "start": "node src/server.js"
+  },
+  "engines": {
+    "node": ">=18.11"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "prisma": "^5.22.0"
+  }
+}
