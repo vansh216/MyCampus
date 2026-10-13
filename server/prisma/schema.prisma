@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum EventType {
+  HACKATHON
+  COMPETITION
+  WORKSHOP
+  CONFERENCE
+  OTHER
+}
+
+enum EventMode {
+  ONLINE
+  OFFLINE
+  HYBRID
+}
+
+enum EventStatus {
+  REGISTERED
+  SUBMITTED
+  SHORTLISTED
+  REJECTED
+  COMPLETED
+}
+
+enum EventSource {
+  POSTER
+  TEXT
+  MANUAL
+}
+
+model Event {
+  id                   String      @id @default(cuid())
+  title                String
+  description          String?
+  organizer            String?
+  type                 EventType   @default(OTHER)
+  mode                 EventMode   @default(OFFLINE)
+  venue                String?
+  registrationLink     String?
+  registrationDeadline DateTime?
+  startDate            DateTime
+  endDate              DateTime?
+  status               EventStatus @default(REGISTERED)
+  source               EventSource @default(MANUAL)
+  posterPath           String?
+  rawText              String?
+  rounds               Round[]
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+
+  @@index([startDate])
+  @@index([status])
+}
+
+model Round {
+  id          String    @id @default(cuid())
+  eventId     String
+  event       Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  name        String
+  order       Int
+  description String?
+  startAt     DateTime?
+  endAt       DateTime?
+  deadline    DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([eventId])
+}
