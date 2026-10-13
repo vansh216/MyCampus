@@ -14,6 +14,14 @@ export function errorHandler(err, req, res, next) {
     status = 404;
     message = "Record not found";
   }
+   if (err.code === "LIMIT_FILE_SIZE") {
+    status = 400;
+    message = "Image is too large. Maximum size is 5 MB.";
+  }
+  if (err.code === "LIMIT_UNEXPECTED_FILE") {
+    status = 400;
+    message = 'Upload the image in a field named "poster".';
+  }
 
   if (status >= 500) console.error(err);
 
