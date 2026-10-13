@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: mycampus-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: mycampus
+      POSTGRES_PASSWORD: mycampus_pass
+      POSTGRES_DB: mycampus
+    ports:
+      - "5433:5432"
+    volumes:
+      - mycampus_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mycampus -d mycampus"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mycampus_pgdata:
