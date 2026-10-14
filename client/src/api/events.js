@@ -18,3 +18,24 @@ export function extractFromPoster(file) {
   form.append("poster", file);
   return api.post("/api/extract/poster", form);
 }
+
+export async function getEvent(id, { signal } = {}) {
+  const data = await api.get(`/api/events/${id}`, { signal });
+  return data.event ?? data;
+}
+
+export function updateStatus(id, status) {
+  return api.patch(`/api/events/${id}/status`, { status });
+}
+
+export function deleteEvent(id) {
+  return api.delete(`/api/events/${id}`);
+}
+
+export function addRound(id, round) {
+  return api.post(`/api/events/${id}/rounds`, round);
+}
+
+export function deleteRound(id, roundId) {
+  return api.delete(`/api/events/${id}/rounds/${roundId}`);
+}

@@ -2,8 +2,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Landing from "./pages/Landing.jsx";
 import AppLayout from "./components/AppLayout.jsx";
 import Timeline from "./pages/Timeline.jsx";
-import ComingNext from "./components/ComingNext.jsx";
 import AddEvent from "./pages/AddEvent.jsx";
+import EventJourney from "./pages/EventJourney.jsx";
 
 export default function App() {
   return (
@@ -13,8 +13,8 @@ export default function App() {
       <Route path="/app" element={<AppLayout />}>
         <Route index element={<Navigate to="timeline" replace />} />
         <Route path="timeline" element={<Timeline />} />
-        <Route path="events/:id" element={<ComingNext title="Event journey" />} />
         <Route path="add" element={<AddEvent />} />
+        <Route path="events/:id" element={<EventJourney />} />
         
       </Route>
 
