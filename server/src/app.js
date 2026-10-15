@@ -6,8 +6,10 @@ import eventRoutes from "./routes/event.routes.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
 import extractRoutes from "./routes/extract.routes.js";
 import { UPLOAD_DIR } from "./middleware/upload.js";
-
+import fs from "node:fs";
+import path from "node:path";
 const app = express();
+fs.mkdirSync(path.resolve("uploads"), { recursive: true });
 
 app.use(cors(process.env.CLIENT_URL));
 app.use(express.json({ limit: "1mb" }));
